@@ -2,5 +2,8 @@ import streamlit as st
 import pandas as pd
 from collections import Counter
 def app():
-    unicorns = pd.read_excel('asset/Top100Candidate_Investment_History.xlsx').astype(str)
+    with open("pages/FDI_Investor_Score.md") as f:
+        st.markdown(f.read())
+
+    unicorns = pd.read_excel('asset/A_22H1_Investor Score.xlsx').astype(str)
     st.dataframe(unicorns)
