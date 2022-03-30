@@ -41,6 +41,15 @@ def json_to_excel(data):
 
         com_stage, com_stage_err = prevent_break(row,'stage')
         
+        com_fundingDate,com_fundingDate_err = prevent_break(row,'fundingInfo') 
+        com_fundingDate,com_fundingDate_err = prevent_break(com_fundingDate,'latestRoundInfo')
+        com_fundingDate,com_fundingDate_err = prevent_break(com_fundingDate,'date') 
+        if com_fundingDate_err == 0:
+            com_fundingDate_Year = com_fundingDate['year']
+            com_fundingDate_Month = com_fundingDate['month']
+        else:
+            com_fundingDate_Year = '-'
+            com_fundingDate_Month = '-'
         com_description, com_description_err = prevent_break(row,'description')
         com_longDescription, com_longDescription_err = prevent_break(com_description,'long')
         com_shortDescription, com_shortDescription_err = prevent_break(com_description,'short')
@@ -56,6 +65,8 @@ def json_to_excel(data):
         row_df = pd.DataFrame({'com_name':com_name,
                                'com_domain':com_domain,
                                'com_stage':com_stage,
+                               'com_fundingDate_Year':com_fundingDate_Year,
+                               'com_fundingDate_Month':com_fundingDate_Month,
                                'com_location_continent':com_location_continent,
                                'com_location_country':com_location_country,
                                'com_longDescription':com_longDescription,

@@ -7,7 +7,6 @@ app = MultiPage()
 st.title("Future Disruption Index")
 
 app.add_page("Future Disruption Index", description.app)
-app.add_page("View Raw Data", view_raw.app)
 app.add_page("FDI Cleanser", FDI_Cleanser.app)
 
 
