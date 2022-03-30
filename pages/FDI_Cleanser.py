@@ -6,7 +6,7 @@ def app():
     with open("pages/FDI_Cleanser.md") as f:
         st.markdown(f.read())
 
-    uploaded_files = st.file_uploader("Choose a CSV file", accept_multiple_files=True)
+    uploaded_files = st.file_uploader("Choose a XLSX file", accept_multiple_files=True)
     for uploaded_file in uploaded_files:
         name = uploaded_file.name.replace('.xlsx','')
         uploaded_file_df = pd.read_excel(uploaded_file)
