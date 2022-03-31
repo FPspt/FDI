@@ -10,10 +10,13 @@ def app():
     data  = pd.read_excel('asset/FDI_raw.xlsx')
     score = pd.read_excel('asset/A_22H1_Investor Score.xlsx')
     
-    top_n = int(st.number_input('Top N Investors', value = 50))
-    time = st.slider("Select the Period of Time",
-                            value=(datetime(2019,1,1),datetime(2022,3,1)),
-                            format="MM/DD/YY")
+    col1, col2 = st.columns(2)
+    with col1:
+        top_n = int(st.number_input('Top N Investors', value = 50))
+    with col2:
+        time = st.slider("Select the Period of Time",
+                                value=(datetime(2019,1,1),datetime(2022,3,1)),
+                                format="MM/DD/YY")
 
     output_df = calculate_feed_score_ratio(data, score, top_n)
     #col2_df = col2_df.style.set_properties(**{'background-color': 'mediumturquoise'}, subset=[f'Top_{top_n_col2}_Ratio'])
