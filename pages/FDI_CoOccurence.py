@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd 
 from utils import calculate_coOccur, filter_feed_score_by_time
 
-def app(lower_bound,upper_bound):
+def app():
     data = pd.read_excel('asset/FDI_Raw.xlsx')
     deduplicate_lv2_to_lv1 = pd.read_excel('asset/Feed_Deduplicate_FeedLV2_To_FeedLV1.xlsx')
 
@@ -12,6 +12,8 @@ def app(lower_bound,upper_bound):
     with col1:
         co_occurwith = st.multiselect('Search feeds Co-Occuring with',companyFeedLV1)
     with col2:
+        lower_bound = datetime(2019,1,1)
+        upper_bound = datetime(2022,3,1)
         time = st.slider("Select the Period of Time",
                                 value=(lower_bound,upper_bound),
                                 format="MM/DD/YY")
