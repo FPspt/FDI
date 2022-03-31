@@ -44,7 +44,7 @@ def json_to_excel(data):
         com_fundingDate,com_fundingDate_err = prevent_break(row,'fundingInfo') 
         com_fundingDate,com_fundingDate_err = prevent_break(com_fundingDate,'latestRoundInfo')
         com_fundingDate,com_fundingDate_err = prevent_break(com_fundingDate,'date') 
-        
+
         if com_fundingDate_err == 0:
             com_fundingDate_Year = com_fundingDate['year']
             com_fundingDate_Month = com_fundingDate['month']
@@ -194,3 +194,24 @@ def tracxn_export_to_fdi(df):
         row_df.columns = row_dict.keys()
         tot = pd.concat([tot,row_df])
     return tot.astype(str)
+
+def calculate_feed_score_ratio(top_n):
+    top_n = 10
+    output = {}
+    for row in tqdm(df.iterrows()):
+        n,row = row
+        investors = row['com_investorList'].split('\n')
+        weight = 0
+        for i in investors:
+            if i in score[:top_n]['Investor Domain'].values:
+                weight +=1 
+        for feed in row[cols]:
+            if output.get(feed) is None:
+                output[feed] = weight
+            else:
+                output[feed] += weight
+    output = sorted(output.items(), key = lambda item: item[1], reverse = True)
+    output = pd.DataFrame(output[1:])
+    output.columns = [f'Top_{top_n}_Feed',f'Top_{top_n}_Occurence']
+    output[f'Top_{top_n}_Ratio'] = (output[f'Top_{top_n}_Occurence'] / output[f'Top_{top_n}_Occurence'].values.sum() *100)
+    return output.astype(str)
