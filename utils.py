@@ -221,4 +221,4 @@ def filter_feed_score_by_time(df,lower_bound,upper_bound):
     date = [datetime(y,m,1) for y,m in zip(df['com_fundingDate_Year'].values,df['com_fundingDate_Month'].values)]
     df['com_fundingDate'] = pd.to_datetime(date)
     filtered_df = df[df["com_fundingDate"].isin(pd.date_range(lower_bound, upper_bound))]  
-    return filtered_df.astype
+    return filtered_df
