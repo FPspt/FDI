@@ -13,7 +13,7 @@ def app():
 
     with col2:
         time = st.slider("Select the Period of Time",
-                                value=(datetime(2019,1,1),datetime(2022,3,1))
+                                value=(datetime(2019,1,1),datetime(2022,3,1)),
                                 format="MM/DD/YY")
 
         top_n_col2 = st.slider('Top_N Investors', 0, 100, 10, key='col2_slider')

@@ -2,6 +2,7 @@ import pandas as pd
 from io import BytesIO
 from pyxlsb import open_workbook as open_xlsb
 import pycountry_convert as pc
+from datetime import datetime
 
 
 # tracxn raw data 파싱할때 na 값 때문에 반복문이 깨지는 것을 방지함
