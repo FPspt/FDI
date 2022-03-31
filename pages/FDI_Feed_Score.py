@@ -13,11 +13,11 @@ def app():
     col2,col3 = st.columns([1,1])
 
     with col2:
+        top_n_col2 = st.number_input('Top N Investors')
         time = st.slider("Select the Period of Time",
                                 value=(datetime(2019,1,1),datetime(2022,3,1)),
                                 format="MM/DD/YY")
 
-        top_n_col2 = st.slider('Top_N Investors', 0, 100, 10, key='col2_slider')
         col2_df = calculate_feed_score_ratio(data, score, top_n_col2)
         #col2_df.drop(f'Top_{top_n_col2}_Occurence')
         #col2_df = col2_df.style.set_properties(**{'background-color': 'mediumturquoise'}, subset=[f'Top_{top_n_col2}_Ratio'])
