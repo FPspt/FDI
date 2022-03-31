@@ -215,3 +215,9 @@ def calculate_feed_score_ratio(df, score, top_n):
     output.columns = [f'Top_{top_n}_Feed',f'Top_{top_n}_Occurence']
     output[f'Top_{top_n}_Ratio'] = (output[f'Top_{top_n}_Occurence'] / output[f'Top_{top_n}_Occurence'].values.sum() *100)
     return output.astype(str)
+
+def filter_feed_score_by_time(df,lower_bound,upper_bound):
+    date = [datetime(y,m,1) for y,m in zip(df['com_fundingDate_Year'].values,df['com_fundingDate_Month'].values)]
+    df['com_fundingDate'] = pd.to_datetime(date)
+    filtered_df = df[df["com_fundingDate"].isin(pd.date_range(lower_bound, upper_bound))]  
+    return filtered_df.astype
