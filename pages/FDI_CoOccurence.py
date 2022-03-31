@@ -13,7 +13,7 @@ def app():
     companyFeedLV2 = list(set(deduplicate_lv2_to_lv1['Deduplicated Feeds (LV2)'].values))
     companyFeedLV1 = list(set(deduplicate_lv2_to_lv1['Deduplicated Feeds (LV1)'].values))
 
-    col1, col2 = st.columns([1,1,3])
+    col1, col2, col3 = st.columns([1,1,3])
     with col1:
         feedLV = st.selectbox('companyFeed Level', ('companyFeedLV1','companyFeedLV2'))
 
@@ -22,7 +22,7 @@ def app():
             co_occurwith = st.multiselect('Search feeds Co-Occuring with',companyFeedLV1)
         else: 
             co_occurwith = st.multiselect('Search feeds Co-Occuring with',companyFeedLV2)
-            
+
     with col3:
         lower_bound = datetime(2019,1,1)
         upper_bound = datetime(2022,3,1)
