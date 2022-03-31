@@ -195,7 +195,7 @@ def tracxn_export_to_fdi(df):
         tot = pd.concat([tot,row_df])
     return tot.astype(str)
 
-def calculate_feed_score_ratio(df, top_n):
+def calculate_feed_score_ratio(df,score, top_n):
     top_n = 10
     output = {}
     for row in df.iterrows():
