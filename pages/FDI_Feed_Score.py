@@ -24,11 +24,8 @@ def app():
 
     data = filter_feed_score_by_time(data,time[0],time[1])
     output_df = calculate_feed_score(data, score, top_n, feedLV)
-    cols = output_df.columns
 
-    output_df = output_df.sort_values(by=cols[2], ascending=False)
-
-    st.dataframe(output_df,width=1200)
+    st.dataframe(output_df)
 
     st.download_button(label=f'📥 Download Current Result',
                             data=to_excel(output_df) ,
