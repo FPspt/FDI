@@ -8,7 +8,8 @@ def app():
         st.markdown(f.read())
 
     unicorns = pd.read_excel('asset/FDI_InvestorScore.xlsx').astype(str)
-    unicorns = unicorns[['Investor Name','Investor Domain','Investor Score']]
+    unicorns['Rank'] = int(unicorns['Investor Score'].rank())
+    unicorns = unicorns[['Rank','Investor Name','Investor Domain','Investor Score']]
 
     st.dataframe(unicorns)
     st.download_button(label='📥 Download Current Result',
