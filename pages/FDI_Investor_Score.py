@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 from collections import Counter
+from utils import to_excel
+
 def app():
     with open("pages/FDI_Investor_Score.md") as f:
         st.markdown(f.read())
