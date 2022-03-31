@@ -8,7 +8,7 @@ def app():
         st.markdown(f.read())
 
     data  = pd.read_excel('asset/FDI_raw.xlsx')
-    score = pd.read_excel('asset/A_22H1_Investor Score.xlsx')
+    score = pd.read_excel('asset/FDI_InvestorScore.xlsx')
     
     col1, col2, col3 = st.columns([1,1,3])
     with col1:
