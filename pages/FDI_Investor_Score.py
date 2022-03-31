@@ -6,4 +6,5 @@ def app():
         st.markdown(f.read())
 
     unicorns = pd.read_excel('asset/FDI_InvestorScore.xlsx').astype(str)
+    unicorns = unicorns[['Investor Name','Investor Domain','Investor Score']]
     st.dataframe(unicorns)
