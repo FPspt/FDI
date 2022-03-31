@@ -198,7 +198,7 @@ def tracxn_export_to_fdi(df):
 def calculate_feed_score_ratio(df, top_n):
     top_n = 10
     output = {}
-    for row in tqdm(df.iterrows()):
+    for row in df.iterrows():
         n,row = row
         investors = row['com_investorList'].split('\n')
         weight = 0
