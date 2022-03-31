@@ -34,7 +34,7 @@ def app():
     if co_occurwith:
         df,tot_num = calculate_coOccur(data, co_occurwith, feedLV)
         st.write(f'Total Number: {tot_num}')
-        st.markdown('Streamlit is **_really_ cool**.')
+        st.markdown(f'Total number of companies including {co_occurwith} as {feedLV}: **{tot_num}**.')
         st.dataframe(df)
 
         st.download_button(label='📥 Download Current Result',
