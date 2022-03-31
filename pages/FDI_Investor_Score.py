@@ -7,7 +7,7 @@ def app():
     with open("pages/FDI_Investor_Score.md") as f:
         st.markdown(f.read())
 
-    unicorns = pd.read_excel('asset/FDI_InvestorScore.xlsx').astype(str)
+    unicorns = pd.read_excel('asset/FDI_InvestorScore.xlsx')
     unicorns['Rank'] = unicorns['Investor Score'].rank(ascending=False).astype(int)
     unicorns = unicorns[['Rank','Investor Name','Investor Domain','Investor Score']]
 
