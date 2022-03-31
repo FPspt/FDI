@@ -6,5 +6,5 @@ def app():
         st.markdown(f.read())
 
     unicorns = pd.read_excel('asset/A_22H1_Investor Score.xlsx').astype(str)
-    unicorns = unicorns.style.set_properties(**{'background-color': 'red'}, subset=['Final Score'])
+    unicorns = unicorns.style.set_properties(**{'background-color': 'mediumturquoise'}, subset=['Final Score'])
     st.dataframe(unicorns)
