@@ -195,9 +195,10 @@ def tracxn_export_to_fdi(df):
         tot = pd.concat([tot,row_df])
     return tot.astype(str)
 
-def calculate_feed_score_ratio(df,score, top_n):
+def calculate_feed_score_ratio(df, score, top_n):
     top_n = 10
     output = {}
+    cols = [_ for _ in df.columns if _.startswith('companyFeedLV1')]
     for row in df.iterrows():
         n,row = row
         investors = row['com_investorList'].split('\n')
