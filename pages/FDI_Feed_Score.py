@@ -29,4 +29,4 @@ def app():
 
     st.download_button(label=f'📥 Download Current Result',
                             data=to_excel(output_df) ,
-                            file_name= f'[FDI]Feed Score.xlsx')
+                            file_name= '[FDI]Feed Score.xlsx')
