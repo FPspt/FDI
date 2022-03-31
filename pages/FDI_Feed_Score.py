@@ -23,6 +23,7 @@ def app():
     cols = output_df.columns
 
     output_df = output_df.sort_values(by=cols[2], ascending=False)
+    output_df = output_df.reset_index()
 
     st.dataframe(output_df,width=1200)
 
