@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd 
-from utils import calculate_coOccur
+from utils import calculate_coOccur, filter_feed_score_by_time
 
 def app(lower_bound,upper_bound):
     data = pd.read_excel('asset/FDI_Raw.xlsx')
