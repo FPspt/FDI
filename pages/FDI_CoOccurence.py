@@ -4,6 +4,9 @@ from datetime import datetime
 from utils import calculate_coOccur, filter_feed_score_by_time
 
 def app():
+    with open("pages/FDI_CoOccurence.md") as f:
+        st.markdown(f.read())
+
     data = pd.read_excel('asset/FDI_Raw.xlsx')
     deduplicate_lv2_to_lv1 = pd.read_excel('asset/Feed_Deduplicate_FeedLV2_To_FeedLV1.xlsx')
 
