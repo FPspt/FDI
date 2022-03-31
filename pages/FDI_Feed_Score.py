@@ -23,9 +23,8 @@ def app():
     cols = output_df.columns
 
     output_df = output_df.sort_values(by=cols[2], ascending=False)
-    #output_df = output_df.style.set_properties(**{'background-color': 'mediumturquoise'}, subset=[cols[2]])
 
-    st.dataframe(output_df,width=800)
+    st.dataframe(output_df,width=1200)
 
     st.download_button(label=f'📥 Download Current Result',
                             data=to_excel(output_df) ,
