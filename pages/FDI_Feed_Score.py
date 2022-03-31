@@ -3,6 +3,7 @@ import pandas as pd
 from utils import calculate_feed_score_ratio,to_excel
 
 def app():
+    st.set_page_config(layout="wide")
     with open("pages/FDI_Feed_Score.md") as f:
         st.markdown(f.read())
 
