@@ -32,8 +32,8 @@ def app():
         data = filter_feed_score_by_time(data,time[0],time[1])
 
     if co_occurwith:
-        df,tot_num = calculate_coOccur(data,co_occurwith)
-        st.write(f'A total of {tot_num} companies include {co_occurwith} as {feedLV}.')
+        df,tot_num = calculate_coOccur(data, co_occurwith, feedLV)
+        st.text(f'A total of **{tot_num}**companies include {co_occurwith} as {feedLV}.')
         st.dataframe(df)
 
         st.download_button(label='📥 Download Current Result',
