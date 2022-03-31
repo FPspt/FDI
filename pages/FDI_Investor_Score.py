@@ -9,7 +9,9 @@ def app():
 
     unicorns = pd.read_excel('asset/FDI_InvestorScore.xlsx').astype(str)
     unicorns = unicorns[['Investor Name','Investor Domain','Investor Score']]
+
+    st.dataframe(unicorns)
     st.download_button(label='📥 Download Current Result',
                                 data=to_excel(unicorns) ,
                                 file_name= '[FDI]Investor Score.xlsx')
-    st.dataframe(unicorns)
+    

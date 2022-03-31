@@ -217,7 +217,7 @@ def calculate_feed_score(df, score, top_n, feedLV):
         for i in investors:
             if i in score[:top_n]['Investor Domain'].values:
                 occ_weight +=1 
-                investor_weight += score[score['Investor Domain'] == i]['Final Score'].values[0]
+                investor_weight += score[score['Investor Domain'] == i]['Investor Score'].values[0]
 
         for feed in feeds:
             if output.get(feed) is None:
