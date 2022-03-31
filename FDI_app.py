@@ -3,9 +3,9 @@ from multipage import MultiPage
 from pages import FDI_Main, FDI_Feed_Score, FDI_CoOccurence, FDI_Investor_Score, FDI_Cleanser
 
 app = MultiPage()
+st.set_page_config(layout="wide")
 
 st.title("Future Disruption Index")
-st.set_page_config(layout="wide")
 app.add_page("Future Disruption Index", FDI_Main.app)
 app.add_page("FDI Feed Score", FDI_Feed_Score.app)
 app.add_page(" -> FDI Co-Occurence Calculator", FDI_CoOccurence.app)
