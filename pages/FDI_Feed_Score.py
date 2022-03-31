@@ -13,7 +13,7 @@ def app():
     col2,col3 = st.columns([1,1])
 
     with col2:
-        top_n_col2 = st.number_input('Top N Investors')
+        top_n_col2 = int(st.number_input('Top N Investors', value = 50))
         time = st.slider("Select the Period of Time",
                                 value=(datetime(2019,1,1),datetime(2022,3,1)),
                                 format="MM/DD/YY")
