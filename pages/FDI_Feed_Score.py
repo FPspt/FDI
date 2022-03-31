@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 from datetime import datetime
-from utils import calculate_feed_score_ratio, to_excel, filter_feed_score_by_time
+from utils import calculate_feed_score, to_excel, filter_feed_score_by_time
 
 def app():
     with open("pages/FDI_Feed_Score.md") as f:
@@ -19,7 +19,7 @@ def app():
                                 format="MM/DD/YY")
 
     data = filter_feed_score_by_time(data,time[0],time[1])
-    output_df = calculate_feed_score_ratio(data, score, top_n)
+    output_df = calculate_feed_score(data, score, top_n)
     #col2_df = col2_df.style.set_properties(**{'background-color': 'mediumturquoise'}, subset=[f'Top_{top_n_col2}_Ratio'])
 
     st.dataframe(output_df)

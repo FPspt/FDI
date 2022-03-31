@@ -196,26 +196,45 @@ def tracxn_export_to_fdi(df):
         tot = pd.concat([tot,row_df])
     return tot.astype(str)
 
-def calculate_feed_score_ratio(df, score, top_n):
+def calculate_feed_score(df, score, top_n):
     output = {}
-    cols = [_ for _ in df.columns if _.startswith('companyFeedLV1')]
+
+    feed_col = [_ for _ in df.columns if _.startswith('companyFeedLV1')]
     for row in df.iterrows():
         n,row = row
         investors = row['com_investorList'].split('\n')
-        weight = 0
+        feeds = [_ for _ in row[feed_col] if _ != '-']
+
+        occ_weight = 0
+        investor_weight = 0
+
+        if row['com_totalMoneyRaised'] != '-':
+            funded_weight = int(row['com_totalMoneyRaised'])
+        else:
+            funded_weight = 0
+
+
         for i in investors:
             if i in score[:top_n]['Investor Domain'].values:
-                weight +=1 
-        for feed in row[cols]:
+                occ_weight +=1 
+                investor_weight += score[score['Investor Domain'] == i]['Final Score'].values[0]
+
+        for feed in feeds:
             if output.get(feed) is None:
-                output[feed] = weight
+                output[feed] = [occ_weight,investor_weight,funded_weight]
             else:
-                output[feed] += weight
-    output = sorted(output.items(), key = lambda item: item[1], reverse = True)
-    output = pd.DataFrame(output[1:])
-    output.columns = [f'Top_{top_n}_Feed',f'Top_{top_n}_Occurence']
-    output[f'Top_{top_n}_Ratio'] = (output[f'Top_{top_n}_Occurence'] / output[f'Top_{top_n}_Occurence'].values.sum() *100)
-    return output.astype(str)
+                output[feed][0] += occ_weight
+                output[feed][1] += investor_weight
+                output[feed][2] += funded_weight
+
+    output_df = pd.DataFrame({'companyFeedLV1':output.keys(),
+                              'Occurence'      : [a for a,b,c in output.values()],
+                              'Investor Score' : [b for a,b,c in output.values()],
+                              'Funded Amount'  : [c for a,b,c in output.values()]})
+
+    output_df['Occurence Ratio'] = (output_df['Occurence']/output_df['Occurence'].sum()*100)
+    output_df = output_df.drop('Occurence')
+    return output_df
 
 def filter_feed_score_by_time(df,lower_bound,upper_bound):
     date = [datetime(y,m,1) for y,m in zip(df['com_fundingDate_Year'].values,df['com_fundingDate_Month'].values)]
