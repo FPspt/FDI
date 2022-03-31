@@ -5,6 +5,5 @@ def app():
     with open("pages/FDI_Investor_Score.md") as f:
         st.markdown(f.read())
 
-    unicorns = pd.read_excel('asset/A_22H1_Investor Score.xlsx').astype(str)
-    unicorns = unicorns.style.set_properties(**{'background-color': 'mediumturquoise'}, subset=['Final Score'])
+    unicorns = pd.read_excel('asset/FDI_InvestorScore.xlsx').astype(str)
     st.dataframe(unicorns)

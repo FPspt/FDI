@@ -6,3 +6,6 @@ List of Datasets:
 3. \[Investor Score\] Top100Candidate_Investment_History
 4. \[Investor Score\] Unicorns Since 2010
 5. FDI_Raw
+
+How to upload new data.
+https://discuss.streamlit.io/t/how-to-push-data-to-github-from-streamlit-sharing/11790/4
