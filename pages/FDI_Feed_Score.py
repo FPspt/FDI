@@ -20,7 +20,10 @@ def app():
 
     data = filter_feed_score_by_time(data,time[0],time[1])
     output_df = calculate_feed_score(data, score, top_n)
-    #col2_df = col2_df.style.set_properties(**{'background-color': 'mediumturquoise'}, subset=[f'Top_{top_n_col2}_Ratio'])
+    cols = output_df.columns
+
+    output_df = output_df.sort_values(by=cols[2])
+    output_df = output_df.style.set_properties(**{'background-color': 'mediumturquoise'}, subset=[cols[2]])
 
     st.dataframe(output_df)
 
