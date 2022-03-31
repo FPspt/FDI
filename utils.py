@@ -232,8 +232,8 @@ def calculate_feed_score(df, score, top_n, feedLV):
                                'fundedAmount'         : [c for a,b,c in output.values()],
                                'occurence'            : [a for a,b,c in output.values()],})
     
-    output_df['occurenceRatio_by_comNum'] = (output_df['occurence']/output_df['occurence'].sum()*100)
-    output_df['occurenceRatio_by_feedNum'] = (output_df['occurence']/len(df)*100)
+    output_df['occurenceRatio_by_feedNum'] = (output_df['occurence']/output_df['occurence'].sum()*100)
+    output_df['occurenceRatio_by_comNum'] = (output_df['occurence']/len(df)*100)
     output_df['feedScore'] = (output_df['feedScore']/output_df['occurence'])
     output_df['fdiRank'] = output_df['occurenceRatio_by_feedNum'].rank(ascending=False)
     
