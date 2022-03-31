@@ -22,10 +22,10 @@ def app():
     output_df = calculate_feed_score(data, score, top_n)
     cols = output_df.columns
 
-    output_df = output_df.sort_values(by=cols[2])
-    output_df = output_df.style.set_properties(**{'background-color': 'mediumturquoise'}, subset=[cols[2]])
+    output_df = output_df.sort_values(by=cols[2], ascending=False)
+    #output_df = output_df.style.set_properties(**{'background-color': 'mediumturquoise'}, subset=[cols[2]])
 
-    st.dataframe(output_df)
+    st.dataframe(output_df,width=800)
 
     st.download_button(label=f'📥 Download Current Result',
                             data=to_excel(output_df) ,
