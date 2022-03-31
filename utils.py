@@ -199,7 +199,7 @@ def tracxn_export_to_fdi(df):
 def calculate_feed_score(df, score, top_n, feedLV):
     output = {}
 
-    feed_col = [_ for _ in df.columns if _.startswith(f'companyFeedLV{feedLV}')]
+    feed_col = [_ for _ in df.columns if _.startswith(f'{feedLV}')]
     for row in df.iterrows():
         n,row = row
         investors = row['com_investorList'].split('\n')
@@ -227,7 +227,7 @@ def calculate_feed_score(df, score, top_n, feedLV):
                 output[feed][1] += investor_weight
                 output[feed][2] += funded_weight
 
-    output_df = pd.DataFrame({f'companyFeedLV{feedLV}':output.keys(),
+    output_df = pd.DataFrame({f'{feedLV}':output.keys(),
                                'feedScore'            : [b for a,b,c in output.values()],
                                'fundedAmount'         : [c for a,b,c in output.values()],
                                'occurence'            : [a for a,b,c in output.values()],})
@@ -238,7 +238,7 @@ def calculate_feed_score(df, score, top_n, feedLV):
     output_df['fdiRank'] = output_df['occurenceRatio_by_feedNum'].rank(ascending=False)
     
     output_df = output_df.sort_values(by=['fdiRank'])
-    #output_df = output_df[['fdiRank',f'companyFeedLV{feedLV}','feedScore','fundedAmount','occurence','occurenceRatio_by_comNum','occurenceRatio_by_feedNum']]
+    output_df = output_df[['fdiRank',f'{feedLV}','feedScore','fundedAmount','occurence','occurenceRatio_by_comNum','occurenceRatio_by_feedNum']]
     return output_df
 
 def filter_feed_score_by_time(df,lower_bound,upper_bound):
