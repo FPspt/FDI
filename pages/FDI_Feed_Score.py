@@ -10,16 +10,20 @@ def app():
     data  = pd.read_excel('asset/FDI_raw.xlsx')
     score = pd.read_excel('asset/A_22H1_Investor Score.xlsx')
     
-    col1, col2 = st.columns([1,3])
+    col1, col2, col3 = st.columns([1,1,3])
     with col1:
-        top_n = int(st.number_input('Top N Investors', value = 100))
+        feedLV = st.selectbox('companyFeed Level', ('companyFeedLV1','companyFeedLV2'))
+
     with col2:
+        top_n = int(st.number_input('Top N Investors', value = 100))
+
+    with col3:
         time = st.slider("Select the Period of Time",
                                 value=(datetime(2019,1,1),datetime(2022,3,1)),
                                 format="MM/DD/YY")
 
     data = filter_feed_score_by_time(data,time[0],time[1])
-    output_df = calculate_feed_score(data, score, top_n)
+    output_df = calculate_feed_score(data, score, top_n, feedLV)
     cols = output_df.columns
 
     output_df = output_df.sort_values(by=cols[2], ascending=False)

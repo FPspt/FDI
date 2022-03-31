@@ -196,10 +196,10 @@ def tracxn_export_to_fdi(df):
         tot = pd.concat([tot,row_df])
     return tot.astype(str)
 
-def calculate_feed_score(df, score, top_n):
+def calculate_feed_score(df, score, top_n, feedLV):
     output = {}
 
-    feed_col = [_ for _ in df.columns if _.startswith('companyFeedLV1')]
+    feed_col = [_ for _ in df.columns if _.startswith(f'companyFeedLV{feedLV}')]
     for row in df.iterrows():
         n,row = row
         investors = row['com_investorList'].split('\n')
@@ -227,14 +227,18 @@ def calculate_feed_score(df, score, top_n):
                 output[feed][1] += investor_weight
                 output[feed][2] += funded_weight
 
-    output_df = pd.DataFrame({'companyFeedLV1':output.keys(),
-                              'Occurence'      : [a for a,b,c in output.values()],
-                              'Investor Score' : [b for a,b,c in output.values()],
-                              'Funded Amount'  : [c for a,b,c in output.values()]})
-
-    output_df['Occurence Ratio'] = (output_df['Occurence']/output_df['Occurence'].sum()*100)
-    output_df['Investor Score'] = (output_df['Investor Score']/output_df['Occurence'])
-    output_df = output_df.drop('Occurence', axis=1)
+    output_df = pd.DataFrame({f'companyFeedLV{feedLV}':output.keys(),
+                               'feedScore'            : [b for a,b,c in output.values()],
+                               'fundedAmount'         : [c for a,b,c in output.values()],
+                               'occurence'            : [a for a,b,c in output.values()],})
+    
+    output_df['occurenceRatio_by_comNum'] = (output_df['occurence']/output_df['occurence'].sum()*100)
+    output_df['occurenceRatio_by_feedNum'] = (output_df['occurence']/len(df)*100)
+    output_df['feedScore'] = (output_df['feedScore']/output_df['occurence'])
+    output_df['fdiRank'] = output_df['occurenceRatio_by_feedNum'].rank(ascending=False)
+    
+    output_df = output_df.sort_values(by=['fdiRank'])
+    output_df = output_df[['fdiRank',f'companyFeedLV{feedLV}','feedScore','fundedAmount','occurence','occurenceRatio_by_comNum','occurenceRatio_by_feedNum']]
     return output_df
 
 def filter_feed_score_by_time(df,lower_bound,upper_bound):
