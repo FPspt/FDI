@@ -9,17 +9,7 @@ def app():
     data  = pd.read_excel('asset/FDI_raw.xlsx')
     score = pd.read_excel('asset/A_22H1_Investor Score.xlsx')
     
-    col1,col2,col3 = st.columns([2,1,1])
-    with col1:
-        col1_df = calculate_feed_score_ratio(data, score, 100)
-        #col1_df.drop('Top_100_Occurence')
-        #col1_df = col1_df.style.set_properties(**{'background-color': 'mediumturquoise'}, subset=[f'Top_100_Ratio'])
-
-        st.dataframe(col1_df)
-
-        st.download_button(label=f'📥 Download Top_100 Feed Score',
-                        data=to_excel(col1_df) ,
-                        file_name= f'[FDI]Top_100 Feed Score.xlsx')
+    col2,col3 = st.columns([1,1])
 
     with col2:
         top_n_col2 = st.slider('Top_N Investors', 0, 100, 10, key='col2_slider')
