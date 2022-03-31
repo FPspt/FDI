@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd 
 from datetime import datetime
-from utils import calculate_coOccur, filter_feed_score_by_time
+from utils import calculate_coOccur, filter_feed_score_by_time, to_excel
 
 def app():
     with open("pages/FDI_CoOccurence.md") as f:
@@ -27,3 +27,7 @@ def app():
         df,tot_num = calculate_coOccur(data,co_occurwith)
         st.write(f'A total of {tot_num} companies include {co_occurwith} as companyFeedFV1.')
         st.dataframe(df)
+
+        st.download_button(label='📥 Download Current Result',
+                                data=to_excel(df) ,
+                                file_name= f'[FDI]Co-Occurence{co_occurwith}.xlsx')
