@@ -255,19 +255,26 @@ def calculate_coOccur(df, cooccur_with):
         n,row = row
         feeds = [_ for _ in row[feedCol].values if _ != '-']
         feedBool = all(feed in feeds  for feed in cooccur_with)
-
+        mon = row['com_totalMoneyRaised']
+        
+        if mon != '-': mon = int(mon)
+        else: mon = 0
+        
         if feedBool:
             for f in feeds:
                 if output.get(f) is None:
-                    output[f] = 1
+                    output[f] = [1,mon]
                 else:
-                    output[f] +=1
-                tot_num += 1
+                    output[f][0] += 1
+                    output[f][1] += mon
+                    
+            tot_num += 1
 
     for _ in cooccur_with:
          del output[_]
-            
-    output = sorted(output.items(), key = lambda item: item[1], reverse = True)
-    output_df = pd.DataFrame(output)
-    output_df.columns = ['companyFeedLV1','Occurence']
+    
+    output_df = pd.DataFrame({'companyFeedLV1':output.keys(),
+                             'occurence'      :[a for a,b in output.values()],
+                             'fundedAmount'   :[b for a,b in output.values()]})
+    output_df = output_df.sort_values(by=['occurence'],ascending=False)
     return output_df, tot_num
