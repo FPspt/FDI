@@ -33,7 +33,7 @@ def app():
 
     if co_occurwith:
         df,tot_num = calculate_coOccur(data, co_occurwith, feedLV)
-        st.text(f'A total of **{tot_num}**companies include {co_occurwith} as {feedLV}.')
+        st.write(f'Number of companies including {co_occurwith} as {feedLV}: {tot_num}')
         st.dataframe(df)
 
         st.download_button(label='📥 Download Current Result',
