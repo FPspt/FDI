@@ -24,5 +24,6 @@ def app():
         data = filter_feed_score_by_time(data,time[0],time[1])
 
     if co_occurwith:
-        df = calculate_coOccur(data,co_occurwith)
+        df,tot_num = calculate_coOccur(data,co_occurwith)
+        st.write(f'A total of {tot_num} companies include {co_occurwith} as companyFeedFV1.')
         st.dataframe(df)

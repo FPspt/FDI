@@ -250,6 +250,7 @@ def filter_feed_score_by_time(df,lower_bound,upper_bound):
 def calculate_coOccur(df, cooccur_with):
     feedCol = [_ for _ in df.columns if _.startswith('companyFeedLV1')]
     output = {}
+    tot_num = 0
     for row in df.iterrows():
         n,row = row
         feeds = [_ for _ in row[feedCol].values if _ != '-']
@@ -261,6 +262,7 @@ def calculate_coOccur(df, cooccur_with):
                     output[f] = 1
                 else:
                     output[f] +=1
+                tot_num += 1
 
     for _ in cooccur_with:
          del output[_]
@@ -268,4 +270,4 @@ def calculate_coOccur(df, cooccur_with):
     output = sorted(output.items(), key = lambda item: item[1], reverse = True)
     output_df = pd.DataFrame(output)
     output_df.columns = ['companyFeedLV1','Occurence']
-    return output_df
+    return output_df, tot_num
