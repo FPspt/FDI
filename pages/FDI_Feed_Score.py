@@ -6,7 +6,7 @@ def app():
     with open("pages/FDI_Feed_Score.md") as f:
         st.markdown(f.read())
 
-    data  = pd.read_excel('asset/FDI_Raw.xlsx')
+    data  = pd.read_excel('asset/FDI_raw.xlsx')
     score = pd.read_excel('asset/A_22H1_Investor Score.xlsx')
     
     col1,col2,col3 = st.columns([2,1,1])
