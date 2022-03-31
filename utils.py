@@ -246,3 +246,26 @@ def filter_feed_score_by_time(df,lower_bound,upper_bound):
     df['com_fundingDate'] = pd.to_datetime(date)
     filtered_df = df[df["com_fundingDate"].isin(pd.date_range(lower_bound, upper_bound))]  
     return filtered_df
+
+def calculate_coOccur(df, cooccur_with):
+    feedCol = [_ for _ in df.columns if _.startswith('companyFeedLV1')]
+    output = {}
+    for row in df.iterrows():
+        n,row = row
+        feeds = [_ for _ in row[feedCol].values if _ != '-']
+        feedBool = all(feed in feeds  for feed in cooccur_with)
+
+        if feedBool:
+            for f in feeds:
+                if output.get(f) is None:
+                    output[f] = 1
+                else:
+                    output[f] +=1
+
+    for _ in cooccur_with:
+         del output[_]
+            
+    output = sorted(output.items(), key = lambda item: item[1], reverse = True)
+    output_df = pd.DataFrame(output)
+    output_df.columns = ['companyFeedLV1','Occurence']
+    return output_df
