@@ -13,7 +13,7 @@ def app():
     with col1:
         col1_df = calculate_feed_score_ratio(data, score, 100)
         col1_df.drop('Top_100_Occurence')
-        col1_df = col1_df.style.set_properties(**{'background-color': 'mediumturquoise'}, subset=[f'Top_100_Ratio'])
+        #col1_df = col1_df.style.set_properties(**{'background-color': 'mediumturquoise'}, subset=[f'Top_100_Ratio'])
 
         st.dataframe(col1_df)
 
