@@ -238,7 +238,7 @@ def calculate_feed_score(df, score, top_n, feedLV):
     output_df['fdiRank'] = output_df['occurenceRatio_by_feedNum'].rank(ascending=False)
     
     output_df = output_df.sort_values(by=['fdiRank'])
-    output_df = output_df[['fdiRank',f'companyFeedLV{feedLV}','feedScore','fundedAmount','occurence','occurenceRatio_by_comNum','occurenceRatio_by_feedNum']]
+    #output_df = output_df[['fdiRank',f'companyFeedLV{feedLV}','feedScore','fundedAmount','occurence','occurenceRatio_by_comNum','occurenceRatio_by_feedNum']]
     return output_df
 
 def filter_feed_score_by_time(df,lower_bound,upper_bound):
