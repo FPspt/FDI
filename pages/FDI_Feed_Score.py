@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from utils import calculate_feed_score_ratio
+from utils import calculate_feed_score_ratio,to_excel
 
 def app():
     with open("pages/FDI_Feed_Score.md") as f:
