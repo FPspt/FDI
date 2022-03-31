@@ -10,7 +10,7 @@ def app():
     data  = pd.read_excel('asset/FDI_raw.xlsx')
     score = pd.read_excel('asset/A_22H1_Investor Score.xlsx')
     
-    col1, col2 = st.columns(2)
+    col1, col2 = st.columns(1,3)
     with col1:
         top_n = int(st.number_input('Top N Investors', value = 100))
     with col2:

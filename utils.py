@@ -233,7 +233,7 @@ def calculate_feed_score(df, score, top_n):
                               'Funded Amount'  : [c for a,b,c in output.values()]})
 
     output_df['Occurence Ratio'] = (output_df['Occurence']/output_df['Occurence'].sum()*100)
-    output_df = output_df.drop('Occurence')
+    output_df = output_df.drop('Occurence', axis=1)
     return output_df
 
 def filter_feed_score_by_time(df,lower_bound,upper_bound):
